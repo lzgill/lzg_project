@@ -19,3 +19,7 @@
 - Python 3.9
 - PyTorch
 - 其他依赖库（根据项目需求添加）
+
+## 下载项目
+- git克隆
+https://github.com/lzgill/lzg_project.git
