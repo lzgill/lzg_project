@@ -2,6 +2,10 @@
 
 ### debnet+crnn文件说明
 
+该项目是ocr目标检测识别项目
+
+模型结构是两部分，分为dbnet和crnn
+
 - `.idea/`: 存放IDE的项目配置文件。
 - `crnn_chs/`: 存放与CRNN模型结构。
 - `dbnet/`: 存放与DBNet模型结构相关的文件。
