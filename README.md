@@ -1,6 +1,6 @@
 # lzg_project
 
-### 文件说明
+### debnet+crnn文件说明
 
 - `.idea/`: 存放IDE的项目配置文件。
 - `crnn_chs/`: 存放与CRNN模型结构。
