@@ -1,0 +1,7 @@
+lineless_table_rec
+table_cls
+wired_table_rec
+opencv-python
+flask_bootstrap
+flask
+torch==2.4.1

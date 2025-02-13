@@ -1,0 +1,107 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Document</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--    <form action="/upload" method="post" enctype="multipart/form-data">-->
+<!--        <input type="file" name="file">-->
+<!--        <select name="table_type">-->
+<!--            <option value="lineless">无框表格</option>-->
+<!--            <option value="lined">有框表格</option>-->
+<!--        </select>-->
+<!--        <input type="submit" value="开始识别：">-->
+<!--    </form>-->
+<!--    <div id="image-container">-->
+<!--        <img id="output-image" src="" alt="识别结果">-->
+<!--    </div>-->
+<!--    <script>-->
+<!--        document.querySelector('form').onsubmit = function(e) {-->
+<!--            e.preventDefault();-->
+<!--            var formData = new FormData(this);-->
+<!--            fetch('/upload', {-->
+<!--                method: 'POST',-->
+<!--                body: formData-->
+<!--            }).then(response => response.json())-->
+<!--            .then(data => {-->
+<!--                document.getElementById('output-image').src = data.image_url;-->
+<!--                this.reset();-->
+<!--            }).catch(error => {-->
+<!--                console.error('Error:', error);-->
+<!--            });-->
+<!--        };-->
+<!--    </script>-->
+<!--</body>-->
+<!--</html>-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #image-and-table-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start; /* 确保内容从顶部开始排列 */
+            flex-wrap: wrap; /* 允许内容换行 */
+        }
+        .image-table-wrapper {
+            width: 45%; /* 设置包裹容器的宽度 */
+            margin: 20px; /* 设置包裹容器的外边距 */
+            display: flex; /* 使用flex布局 */
+            flex-direction: column; /* 子元素垂直排列 */
+        }
+        .label {
+            font-weight: bold;
+            margin-bottom: 10px; /* 为标签和内容之间添加间隔 */
+        }
+        #output-image {
+            max-width: 100%; /* 设置图片最大宽度为100% */
+        }
+        #output-table {
+            max-width: 100%; /* 设置表格最大宽度为100% */
+            overflow: auto; /* 如果表格内容超出屏幕宽度，显示滚动条 */
+        }
+    </style>
+</head>
+<body>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <select name="table_type">
+            <option value="lineless">无框表格</option>
+            <option value="lined">有框表格</option>
+        </select>
+        <input type="submit" value="开始识别：">
+    </form>
+    <div id="image-and-table-container">
+        <div class="image-table-wrapper">
+            <div class="label">识别结果：</div>
+            <img id="output-image" src="">
+        </div>
+        <div class="image-table-wrapper">
+            <div class="label">表格：</div>
+            <div id="output-table">
+                <!-- 表格内容将通过JavaScript动态插入 -->
+            </div>
+        </div>
+    </div>
+    <script>
+        document.querySelector('form').onsubmit = function(e) {
+            e.preventDefault();
+            var formData = new FormData(this);
+            fetch('/upload', {
+                method: 'POST',
+                body: formData
+            }).then(response => response.json())
+            .then(data => {
+                document.getElementById('output-image').src = data.image_url;
+                document.getElementById('output-table').innerHTML = data.table_html; // 假设服务器返回的JSON中包含table_html字段
+                this.reset();
+            }).catch(error => {
+                console.error('Error:', error);
+            });
+        };
+    </script>
+</body>
+</html>
